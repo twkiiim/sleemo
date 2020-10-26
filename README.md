@@ -138,4 +138,4 @@ def getTodo(id, event):
 
 ## LICENSE
 
-[MIT LISENCE](LISENSE)
+[MIT LICENSE](./LICENSE)
