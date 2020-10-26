@@ -1,8 +1,15 @@
+# Editor
+.vscode/
+
 # Python
 *.egg-info/
 __pycache__
 *.pyc
 Pipfile*
+dist/
 
 # Mac OS X
 .DS_Store
+
+# etc
+TODO.md

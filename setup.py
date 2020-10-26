@@ -29,7 +29,7 @@ class UploadCommand(Command):
         os.system("python setup.py sdist")
         os.system('twine upload dist/*')
         os.system('git tag v{0}'.format(sleemo.__version__))
-        os.system('git push github --tags')
+        os.system('git push github master --tags')
         sys.exit()
 
 

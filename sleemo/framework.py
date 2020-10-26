@@ -4,30 +4,46 @@ import os
 sleemo = None
 
 class Sleemo(object):
-    resolver_path = None
-    operations = []
+    __resolver_path = None
+    __operations = None
+    __logger = None
 
     def __init__(self, **kwargs):
-        # os.environ('DYNAMODB_TABLE_NAME')
+        self.set_options(**kwargs)
 
+    def set_options(self, **kwargs):
+        # os.environ('DYNAMODB_TABLE_NAME')
         for key, value in kwargs.items():
             if key == 'resolver_path':
-                print('resolver_path: {}'.format(value))
-                self.resolver_path = value
+                self.__set_resolver_path(value)
+            
+            if key == 'logger':
+                raise Exception('logger option not implemented yet')
+    
+    def __set_resolver_path(self, resolver_path):
+        if type(resolver_path) != type(''):
+            raise Exception('resolver_path must be string type')
+    
+        print('resolver_path: {}'.format(resolver_path))
+        self.__resolver_path = resolver_path
+        self.__register_opertaions()
 
-            if key == 'operations':
-                print('operations: {}'.format(operations))
-                self.operations = value
-        
-        if self.resolver_path is None:
-            raise Exception('resolver_path is not specified when initializing Sleemo. Put resolver_path when you getting the appsync framework.')
+    def __register_opertaions(self):
+        try:
+            if self.__resolver_path:
+                files = os.listdir(self.__resolver_path)
+                self.__operations = [ f.replace('.py', '') for f in files ]
+                print('Python files under "{}/" directory has been registered as GraphQL resolvers'.format(self.__resolver_path))
+            else:
+                raise Exception('No resolver_path has been set.')
+        except Exception as e:
+            raise Exception('An exception occurred while registering GraphQL operations, given resolver_path: "{}"'.format(self.__resolver_path))
 
-        if len(self.operations) == 0:
-            print('default operations applied - all the python files under "{}/" will be registered as resolvers'.format(self.resolver_path))
-            files = os.listdir(self.resolver_path)
-            self.operations = [ f.replace('.py', '') for f in files ]
+    def get_resolver_path(self):
+        return self.__resolver_path
 
-        self.logger = None
+    def get_operations(self):
+        return self.__operations
 
     def default_gateway(self):
         def _gateway(func, **kwargs):
@@ -45,10 +61,10 @@ class Sleemo(object):
     def resolve(self, event):
         resolver = None
 
-        for op in self.operations:
+        for op in self.__operations:
             if op == event['info']['fieldName']:
                 import sys
-                sys.path.append(self.resolver_path)
+                sys.path.append(self.__resolver_path)
 
                 resolver = __import__(op)
                 break
