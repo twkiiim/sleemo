@@ -46,6 +46,7 @@ setup_options = dict(
     install_requires=['pytz'],
     license="MIT License",
     classifiers=[
+        'Development Status :: 2 - Pre-Alpha',
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3',

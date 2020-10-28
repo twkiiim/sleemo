@@ -1,3 +1,5 @@
+![GitHub](https://img.shields.io/github/license/twkiiim/sleemo)
+
 # Sleemo: AWS AppSync Lambda Application Framework
 
 A Simple yet powerful GraphQL framework powered by AWS AppSync Direct Lambda Resolver.
