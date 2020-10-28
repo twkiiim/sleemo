@@ -20,12 +20,3 @@ def test_createUUID():
     
     assert type(id) == type(str(uuid.uuid4()))
     assert len(id) == len(str(uuid.uuid4()))
-
-
-
-def test_createAWSDateTime():
-    type_utils = get_type_utils(timezone_offset=0)
-    t = type_utils.createAWSDateTime()
-
-    assert
-    
