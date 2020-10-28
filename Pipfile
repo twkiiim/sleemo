@@ -8,6 +8,3 @@ pytest = "*"
 
 [packages]
 pytz = "*"
-
-[requires]
-python_version = "3.7"
