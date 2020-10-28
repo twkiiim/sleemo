@@ -12,7 +12,7 @@ def test_get_appsync_type_utils_with_timezone_offset():
     timezone_offset = 9
     type_utils = get_type_utils(timezone_offset=timezone_offset)
 
-    assert type_utils.get_timezone_offset() == timezone_offset
+    assert type_utils.timezone_offset == timezone_offset
 
 def test_createUUID():
     type_utils = get_type_utils()
