@@ -66,3 +66,9 @@ def get_appsync_framework(**kwargs: dict) -> Sleemo:
         sleemo = Sleemo(**kwargs)
     
     return sleemo
+
+def get_logger():
+    if sleemo is None:
+        raise Exception('get_appsync_framework() must be called before get_logger()')
+    
+    return sleemo.logger
