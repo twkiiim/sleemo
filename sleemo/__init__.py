@@ -1,8 +1,8 @@
 # -*- coding:utf-8 -*-
-"""AWS AppSync Lambda Application Framework"""
+"""AWS AppSync Direct Lambda Resolver Framework"""
 
 __author__ = "Taewoo Kim <twkiiim@gmail.com>"
-__version__ = "0.0.2"
+__version__ = "0.1.0"
 __status__ = "alpha"
-__date__ = "26 Oct 2020"
+__date__ = "29 Oct 2020"
 

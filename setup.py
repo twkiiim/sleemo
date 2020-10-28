@@ -36,7 +36,7 @@ class UploadCommand(Command):
 setup_options = dict(
     name='sleemo',
     version=sleemo.__version__,
-    description='AWS AppSync Lambda Application Framework',
+    description='AWS AppSync Direct Lambda Resolver Framework',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
     author='Taewoo Kim',
