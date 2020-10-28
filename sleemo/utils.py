@@ -1,54 +1,74 @@
 import datetime
+import time
 import pytz
 import uuid
 
-utils = None
+type_utils = None
 
 class AppSyncTypeUtils(object):
-    __timezone_offset = 0
 
-    def __init__(self, **kwargs):
-        self.set_options(**kwargs)
+    def __init__(
+        self, 
+        timezone_offset: int = 0
+    ):
+        self.timezone_offset = timezone_offset
     
-    def set_options(self, **kwargs):
-        for key, value in kwargs.items():
-            if key == 'timezone_offset':
-                self.__set_timezone_offset(value)
-    
-    def __set_timezone_offset(self, timezone_offset):
-        if type(timezone_offset) != type(0):
-            raise Exception('timezone_offset must be integer type')
-
-        self.__timezone_offset = timezone_offset
-
-    def get_timezone_offset(self):
-        return self.__timezone_offset
-
     def createUUID(self):
         return str(uuid.uuid4())
-        
-    
-    def createAWSDateTime(self):
-        time_fmt = '%Y-%m-%dT%H:%M:%S'
-        
-        if self.__timezone_offset == 0:
-            time_fmt += 'Z'
+
+    def createAWSDate(self):
+        fmt = '%Y-%m-%d'
+
+        if self.timezone_offset == 0:
+            fmt += 'Z'
         else:
-            time_fmt += '+' if self.__timezone_offset > 0 else '-'
-            time_fmt += str(abs(self.__timezone_offset)).zfill(2)
-            time_fmt += ':00:00'
-        
-        now = datetime.datetime.utcnow()
-        now = now + datetime.timedelta(hours=self.__timezone_offset)
-        return now.strftime(time_fmt)
+            fmt += '+' if self.timezone_offset > 0 else '-'
+            fmt += str(abs(self.timezone_offset)).zfill(2)
+            fmt += ':00:00'
 
-    def getAWSDateTime(self, value):
-        return value.strftime('%Y-%m-%dT%H:%M:%SZ')
-
-def get_appsync_type_utils(**kwargs: dict):
-    global utils
-
-    if utils is None or len(kwargs) > 0:
-        utils = AppSyncTypeUtils(**kwargs)
+        now = datetime.datetime.utcnow().date()
+        now = now + datetime.timedelta(hours=self.timezone_offset)
+        return now.strftime(fmt)
     
-    return utils
+    def createAWSTime(self):
+        fmt = '%H:%M:%S'
+
+        if self.timezone_offset == 0:
+            fmt += 'Z'
+        else:
+            fmt += '+' if self.timezone_offset > 0 else '-'
+            fmt += str(abs(self.timezone_offset)).zfill(2)
+            fmt += ':00:00'
+
+        now = datetime.datetime.utcnow().time()
+        now = now + datetime.timedelta(hours=self.timezone_offset)
+        return now.strftime(fmt)
+
+    def createAWSDateTime(self):
+        fmt = '%Y-%m-%dT%H:%M:%S'
+
+        if self.timezone_offset == 0:
+            fmt += 'Z'
+        else:
+            fmt += '+' if self.timezone_offset > 0 else '-'
+            fmt += str(abs(self.timezone_offset)).zfill(2)
+            fmt += ':00:00'
+
+        now = datetime.datetime.utcnow()
+        now = now + datetime.timedelta(hours=self.timezone_offset)
+        return now.strftime(fmt)
+
+    def createAWSTimestamp(self):
+        return time.time()
+
+    # def createAWSJSON(self):
+    #     pass
+
+
+def get_type_utils(**kwargs: dict):
+    global type_utils
+
+    if type_utils is None or len(kwargs) > 0:
+        type_utils = AppSyncTypeUtils(**kwargs)
+    
+    return type_utils

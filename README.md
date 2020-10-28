@@ -94,17 +94,17 @@ def handler(event, context):
 Now, let's take a look at how each resolver file lookes like. **`Sleemo`** doesn't care of how each resolver function should be implemented. You can use any libraries you prefer to implement your resolvers. **`Sleemo`** just passes the operation argument `input: CreateTodoInput` to `createTodo()` function with the original `event` variable.
 
 ```python
-from sleemo.utils import get_appsync_type_utils
+from sleemo.utils import get_type_utils
 
 def createTodo(input, event):
 
     ## Your business logic here. 
     ## Below is an example of return data
 
-    utils = get_appsync_type_utils()
+    utils = get_type_utils()
 
     todo = {
-        'id': utils.createID(),
+        'id': utils.createUUID(),
         'author': input['author'],
         'title': input['title'],
         'content': input['content'],
@@ -118,17 +118,17 @@ def createTodo(input, event):
 Let's take another example of the resolver function `getTodo()`.
 
 ```python
-from sleemo.utils import get_appsync_type_utils
+from sleemo.utils import get_type_utils
 
 def getTodo(id, event):
 
     ## Your business logic here. 
     ## Below is an example of return data
 
-    utils = get_appsync_type_utils()
+    utils = get_type_utils()
 
     todo = {
-        'id': utils.createID(),
+        'id': utils.createUUID(),
         'author': 'Taewoo Kim',
         'title': 'Sleemo Usage Example',
         'content': 'Simple yet powerful serverless GraphQL framework',

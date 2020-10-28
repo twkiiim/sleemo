@@ -1,36 +1,31 @@
-from sleemo.utils import AppSyncTypeUtils, get_appsync_type_utils
+import uuid
+from sleemo.utils import AppSyncTypeUtils, get_type_utils
+
 
 def test_get_appsync_type_utils():
-    utils = get_appsync_type_utils()
+    type_utils = get_type_utils()
     
-    assert utils is not None
-    isinstance(utils, AppSyncTypeUtils)
+    assert type_utils is not None
+    isinstance(type_utils, AppSyncTypeUtils)
 
 def test_get_appsync_type_utils_with_timezone_offset():
     timezone_offset = 9
-    utils = get_appsync_type_utils(timezone_offset=timezone_offset)
+    type_utils = get_type_utils(timezone_offset=timezone_offset)
 
-    assert utils is not None
-    isinstance(utils, AppSyncTypeUtils)
-    assert utils.get_timezone_offset() == timezone_offset
-
-def test_utils_set_options_with_timezone_offset():
-    utils = get_appsync_type_utils()
-    timezone_offset = 9
-    utils.set_options(timezone_offset=timezone_offset)
-    
-    assert utils.get_timezone_offset() == timezone_offset
-
+    assert type_utils.get_timezone_offset() == timezone_offset
 
 def test_createUUID():
-    utils = get_appsync_type_utils()
-    uuid = utils.createUUID()
+    type_utils = get_type_utils()
+    id = type_utils.createUUID()
     
-    assert type(uuid) == type('')
+    assert type(id) == type(str(uuid.uuid4()))
+    assert len(id) == len(str(uuid.uuid4()))
+
+
 
 def test_createAWSDateTime():
-    utils = get_appsync_type_utils(timezone_offset=0)
-    t = utils.createAWSDateTime()
+    type_utils = get_type_utils(timezone_offset=0)
+    t = type_utils.createAWSDateTime()
 
-    assert type(t) == type('')
+    assert
     
