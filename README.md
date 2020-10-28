@@ -1,3 +1,5 @@
+![](./image/sleemo.png)
+
 ![version](https://img.shields.io/static/v1?label=release&message=alpha&color=informational)
 ![badge](https://action-badges.now.sh/twkiiim/sleemo?action=test)
 ![GitHub](https://img.shields.io/github/license/twkiiim/sleemo)
