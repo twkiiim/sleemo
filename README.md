@@ -1,13 +1,10 @@
+![version](https://img.shields.io/static/v1?label=release&message=alpha&color=informational)
 ![badge](https://action-badges.now.sh/twkiiim/sleemo?action=test)
 ![GitHub](https://img.shields.io/github/license/twkiiim/sleemo)
 
 # Sleemo: AWS AppSync Direct Lambda Resolver Framework
 
 A Simple yet powerful serverless GraphQL framework powered by AWS AppSync Direct Lambda Resolver.
-
-## Caution
-
-**`Sleemo`** is still in the development phase. It aims to release its first version in November, 2020.
 
 ## Features
 - No need to manually import other resolver functions and manage the tedious if-else based router from the gateway Lambda handler.
