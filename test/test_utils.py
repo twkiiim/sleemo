@@ -2,13 +2,13 @@ import uuid
 from sleemo.utils import AppSyncTypeUtils, get_type_utils
 
 
-def test_get_appsync_type_utils():
+def test_get_type_utils():
     type_utils = get_type_utils()
     
     assert type_utils is not None
     isinstance(type_utils, AppSyncTypeUtils)
 
-def test_get_appsync_type_utils_with_timezone_offset():
+def test_get_type_utils_with_timezone_offset():
     timezone_offset = 9
     type_utils = get_type_utils(timezone_offset=timezone_offset)
 

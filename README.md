@@ -95,13 +95,18 @@ Now, let's take a look at how each resolver file lookes like. **`Sleemo`** doesn
 
 ```python
 from sleemo.utils import get_type_utils
+from sleemo.framework import get_logger
+
+logger = get_logger()
 
 def createTodo(input, event):
 
     ## Your business logic here. 
     ## Below is an example of return data
 
-    utils = get_type_utils()
+    logger.info('createTodo start')
+
+    utils = get_type_utils(timezone_offset=9)
 
     todo = {
         'id': utils.createUUID(),
@@ -111,6 +116,8 @@ def createTodo(input, event):
         'done': False,
         'createdAt': utils.createAWSDateTime(),
     }
+
+    logger.info('createTodo end')
 
     return todo
 ```
@@ -125,7 +132,7 @@ def getTodo(id, event):
     ## Your business logic here. 
     ## Below is an example of return data
 
-    utils = get_type_utils()
+    utils = get_type_utils(timezone_offset=9)
 
     todo = {
         'id': utils.createUUID(),
